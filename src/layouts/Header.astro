@@ -1,0 +1,71 @@
+<header class="header">
+    <nav class="menu">
+        <a href="#hero" class="nav_link hero" aria-label="hero">About</a>
+        <a href="#experience" class="nav_link experience" aria-label="experience">Experience</a>
+        <a href="#projects" class="nav_link projects" aria-label="projects">Projects</a>
+        <!-- <a href="stack" class="nav_link stack" aria-label="stack">Stack</a> -->
+    </nav>
+
+    <script>
+        const pageSections = document.querySelectorAll(".page_section");
+        const links = document.querySelectorAll(".nav_link");
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((section) => {
+                        if (section.isIntersecting) {
+                            for (const link of links) {
+                                if (section.target.id === link.getAttribute("aria-label")) {
+                                    link.classList.add("nav_link_activated");
+                                } else {
+                                    link.classList.remove("nav_link_activated");
+                                }
+                            }
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: "0px",
+                    threshold: 0.5,
+                },
+            );
+
+            pageSections.forEach((section) => observer.observe(section));
+
+        });
+    </script>
+
+    <style>
+        .header {
+            position: sticky;
+            z-index: 999;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .menu {
+            display: flex;
+            backdrop-filter: blur(6px);
+            gap: 20px;
+            justify-content: center;
+            height: 60px;
+            align-items: center;
+        }
+
+        .nav_link {
+            text-decoration: none;
+            color: var(--inactive-link-color);
+        }
+
+        .nav_link_activated {
+            color: #ffffff;
+        }
+
+        .nav_link:hover {
+            color: var(--active-link-color);
+        }
+    </style>
+</header>

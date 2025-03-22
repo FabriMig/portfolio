@@ -1,0 +1,264 @@
+---
+import SectionTitle from '../components/SectionTitle.astro';
+import Typescript from './icons/Typescript.astro';
+import Mongo from './icons/Mongo.astro';
+import React from './icons/React.astro';
+import Express from './icons/Express.astro';
+import Link from './icons/Link.astro';
+import Github from './icons/Github.astro';
+import MySQL from './icons/MySQL.astro';
+
+const TAGS = {
+    typescript: {
+        name: "Typescript",
+        icon: Typescript,
+        styles: {backgroundColor: "#003159", color: "#FFFFFF"}
+    },
+    mongodb: {
+        name: "Mongo db",
+        icon: Mongo,
+        styles: {backgroundColor: "#0F362D", color: "#FFFFFF"}
+    },
+    react: {
+        name: "React",
+        icon: React,
+        styles: {backgroundColor: "#20232A", color: "#FFFFFF"}
+    },
+    express: {
+        name: "express",
+        icon: Express,
+        styles: {backgroundColor: "#323232", color: "#FFFFFF"}
+    },
+    mySql: {
+        name: "MySQL",
+        icon: MySQL,
+        styles: {backgroundColor: "#00758F", color: "#FFFFFF"}
+    },
+    reactNative: {
+        name: "React native",
+        icon: React,
+        styles: {backgroundColor: "#121212", color: "#61DAFB"}
+    },
+}
+
+const projects = [
+    {
+        name: "Solucionador de ecuaciones",
+        description: "Página web y API para resolver ecuaciones de primer grado creada desde cero",
+        techStack: [TAGS.typescript, TAGS.mongodb, TAGS.react, TAGS.express],
+        imageRoute: "/equationWeb.webp",
+        github: "https://github.com/FabriMig/equations-web",
+        site: "https://equations-web.vercel.app"
+    },
+    {
+        name: "Virtual Learning",
+        description: "Página web creada con el objetivo de mitigar el impacto de la pandemia en la educación en Costa Rica",
+        techStack: [TAGS.typescript, TAGS.mySql, TAGS.express],
+        imageRoute: "/virtualLearningHome.webp",
+        github: "",
+        site: ""
+    },
+    {
+        name: "SGA",
+        description: "Página web y app para agilizar procesos administrativos y aumentar la disponibilidad de contenido en escuelas y colegios de Costa Rica",
+        techStack: [TAGS.typescript, TAGS.mongodb, TAGS.express, TAGS.reactNative],
+        imageRoute: "/virtualLearningLogin.webp",
+        github: "",
+        site: ""
+    }
+]
+
+---
+
+<section class="projects_section page_section" id="projects">
+    <SectionTitle>
+        Projects
+    </SectionTitle>
+
+    <div class="projects_card_container">
+        {projects.map(project => (
+            <div class="project_card">
+                <div class="project_image_container">
+                    <img src={project.imageRoute} alt={`${project.name} image project`}>
+                </div>
+                <div class="project_info_container">
+                    <h3>{project.name}</h3>
+                    <ul class="techstack_prject_card_contaienr">
+                        {project.techStack.map(technology => (
+                            <li>
+                                <span style={technology.styles} class="techPill">
+                                    <technology.icon height="16" width="16"/>
+                                    {technology.name}
+                                </span>
+
+                            </li>
+                        ))}
+                    </ul>
+                    <p>{project.description}</p>
+                    <footer class="project_card_actions">
+                        {project.github && (
+                            <a href={project.github} target="_blank">
+                                <span class="action_content">
+                                    <Github height="20" width="20"/>
+                                    Github
+                                </span>
+                                <span class="action_shape action_shape_1"></span>
+                                <span class="action_shape action_shape_2"></span>
+                            </a>
+                        )}
+                        {project.site && (
+                            <a href={project.site} target="_blank">
+                                <span class="action_content">
+                                    <Link height="20" width="20"/>
+                                    Preview
+                                </span>
+                                <span class="action_shape action_shape_1"></span>
+                                <span class="action_shape action_shape_2"></span>
+                            </a>
+                        )}
+                    </footer>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <style>
+        .projects_section {
+            padding-top: 10px;
+        }
+
+        .projects_card_container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center
+        }
+
+        .project_card {
+            display: flex;
+            // flex-grow: 1;
+            flex-direction: column;
+            width: 450px;
+            border: 1px solid #33323E;
+            margin-right: auto;
+        }
+
+        .project_image_container {
+            width: 100%;
+            height: 220px;
+
+            & > img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                height: 220px;
+                border-bottom: 1px solid #33323E;
+            }
+        }
+
+        .project_info_container {
+            padding: 20px;
+            box-sizing: border-box;
+
+            & > h3 {
+                font-size: 25px;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            & > p {
+                color: #D1D5DB;
+            }
+
+            &  > ul {
+                padding: 0;
+            }
+
+        }
+
+        .techPill {
+            // border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding: 7px 10px;
+            box-sizing: border-box;
+            font-size: 12px;
+            gap: 8px;
+            // height: 21px;
+        }
+
+        .techstack_prject_card_contaienr {
+            display: flex;
+            gap: 5px;
+            list-style: none;
+        }
+
+        .project_card_actions {
+            display: flex;
+            gap: 8px;
+
+            & > a {
+                padding: 0;
+                margin: 0;
+                background-color: #000;
+                border: 1px solid #33323E;
+                color: #FFFFFF;
+                padding: 10px 15px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                text-decoration: none;
+                font-family: "roboto";
+                position: relative;
+                overflow: hidden;
+                &:hover {
+                    .action_shape {
+                        transform: translateY(0);
+                    }
+                }
+            }
+
+            & > a > span {
+                mix-blend-mode: difference;
+            }
+        }
+
+        .action_content {
+            align-items: center;
+            display: flex;
+            gap: 8px;
+        }
+
+        .action_shape {
+            position: absolute;
+            width: 50%;
+            background-color: #FFFFFF;
+            height: 100%;
+            transform: translateY(100%);
+            transition: transform .2s;
+        }
+
+        .action_shape_1 {
+            left: 0;
+        }
+
+        .action_shape_2 {
+            right: 0;
+            transition-delay: .2s;
+        }
+
+        @media (max-width: 600px) {
+            .projects_section {
+                padding: 10px 30px 0 30px;
+            }
+
+            .project_card {
+                margin: auto;
+            }
+
+        }
+
+
+    </style>
+</section>
